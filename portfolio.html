@@ -1,0 +1,1070 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>[Your Name] — Data Scientist Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Instrument+Serif:ital@0;1&family=DM+Mono:wght@300;400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink: #0f0e0c;
+    --ink-2: #3a3830;
+    --ink-3: #8a8880;
+    --paper: #f5f2eb;
+    --paper-2: #ece9e0;
+    --paper-3: #e0ddd4;
+    --accent: #c8451a;
+    --accent-2: #e8b84b;
+    --accent-3: #2a4a3a;
+    --mono: 'DM Mono', monospace;
+    --sans: 'DM Sans', sans-serif;
+    --serif: 'Instrument Serif', serif;
+    --display: 'Bebas Neue', sans-serif;
+  }
+
+  html { scroll-behavior: smooth; font-size: 16px; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-weight: 300;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.2rem 3rem;
+    background: var(--paper);
+    border-bottom: 1px solid var(--paper-3);
+    transition: box-shadow 0.3s;
+  }
+  nav.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,0.06); }
+  .nav-logo {
+    font-family: var(--display);
+    font-size: 1.6rem;
+    letter-spacing: 0.05em;
+    color: var(--ink);
+    text-decoration: none;
+  }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-2);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--accent); }
+
+  /* SECTIONS */
+  section { min-height: 100vh; padding: 8rem 3rem 5rem; }
+
+  /* ─── HERO ─── */
+  #home {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+    padding-top: 10rem;
+  }
+
+  .hero-left { position: relative; }
+
+  .hero-eyebrow {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+  .hero-eyebrow::before {
+    content: '';
+    display: block;
+    width: 2rem;
+    height: 1px;
+    background: var(--accent);
+  }
+
+  .hero-headline {
+    font-family: var(--display);
+    font-size: clamp(4rem, 7vw, 7.5rem);
+    line-height: 0.92;
+    letter-spacing: 0.02em;
+    color: var(--ink);
+    margin-bottom: 2rem;
+  }
+  .hero-headline em {
+    font-family: var(--serif);
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .hero-bio {
+    font-size: 1.05rem;
+    color: var(--ink-2);
+    line-height: 1.8;
+    max-width: 480px;
+    margin-bottom: 2.5rem;
+    border-left: 2px solid var(--accent-2);
+    padding-left: 1.2rem;
+  }
+
+  .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 0.9rem 2rem;
+    text-decoration: none;
+    border: 1.5px solid;
+    transition: all 0.25s;
+    cursor: pointer;
+  }
+  .btn-primary {
+    background: var(--ink);
+    color: var(--paper);
+    border-color: var(--ink);
+  }
+  .btn-primary:hover { background: var(--accent); border-color: var(--accent); }
+  .btn-outline {
+    background: transparent;
+    color: var(--ink);
+    border-color: var(--paper-3);
+  }
+  .btn-outline:hover { border-color: var(--ink); }
+  .btn-sm {
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.65rem 1.2rem;
+    text-decoration: none;
+    border: 1px solid var(--paper-3);
+    color: var(--ink-2);
+    transition: all 0.2s;
+  }
+  .btn-sm:hover { border-color: var(--ink); color: var(--ink); }
+
+  .hero-right {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .hero-stat-card {
+    background: var(--paper-2);
+    border: 1px solid var(--paper-3);
+    padding: 1.5rem;
+    position: relative;
+    overflow: hidden;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeUp 0.6s forwards;
+  }
+  .hero-stat-card:nth-child(1) { animation-delay: 0.3s; }
+  .hero-stat-card:nth-child(2) { animation-delay: 0.5s; }
+  .hero-stat-card:nth-child(3) { animation-delay: 0.7s; }
+  .hero-stat-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px; height: 100%;
+    background: var(--accent);
+  }
+  .stat-num {
+    font-family: var(--display);
+    font-size: 3rem;
+    line-height: 1;
+    color: var(--ink);
+    margin-bottom: 0.25rem;
+  }
+  .stat-label {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+  }
+
+  @keyframes fadeUp {
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ─── SECTION HEADER ─── */
+  .section-header {
+    display: flex;
+    align-items: flex-end;
+    gap: 2rem;
+    margin-bottom: 4rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--paper-3);
+  }
+  .section-number {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    color: var(--ink-3);
+    letter-spacing: 0.1em;
+    padding-bottom: 0.2rem;
+  }
+  .section-title {
+    font-family: var(--display);
+    font-size: clamp(3rem, 5vw, 5rem);
+    line-height: 0.95;
+    letter-spacing: 0.02em;
+    color: var(--ink);
+  }
+  .section-title em {
+    font-family: var(--serif);
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  /* ─── PROJECTS ─── */
+  #projects { background: var(--paper); }
+
+  .project-card {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 3rem;
+    padding: 3rem 0;
+    border-top: 1px solid var(--paper-3);
+    transition: all 0.3s;
+  }
+  .project-card:last-of-type { border-bottom: 1px solid var(--paper-3); }
+
+  .project-meta { padding-top: 0.3rem; }
+  .project-index {
+    font-family: var(--display);
+    font-size: 5rem;
+    line-height: 1;
+    color: var(--paper-3);
+    margin-bottom: 1rem;
+  }
+  .project-tags { display: flex; flex-direction: column; gap: 0.4rem; }
+  .tag {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    background: rgba(200, 69, 26, 0.07);
+    padding: 0.25rem 0.6rem;
+    width: fit-content;
+  }
+
+  .project-content {}
+  .project-title {
+    font-family: var(--display);
+    font-size: 2.2rem;
+    letter-spacing: 0.03em;
+    line-height: 1.1;
+    color: var(--ink);
+    margin-bottom: 0.75rem;
+  }
+  .project-hook {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 1.1rem;
+    color: var(--ink-2);
+    margin-bottom: 1.2rem;
+    line-height: 1.6;
+  }
+  .project-desc {
+    font-size: 0.95rem;
+    color: var(--ink-2);
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+  }
+
+  .project-findings {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin-bottom: 1.8rem;
+  }
+  .finding {
+    background: var(--paper-2);
+    padding: 1rem;
+    border-top: 2px solid var(--accent-2);
+  }
+  .finding-val {
+    font-family: var(--display);
+    font-size: 2rem;
+    color: var(--ink);
+    line-height: 1;
+    margin-bottom: 0.2rem;
+  }
+  .finding-desc {
+    font-family: var(--mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+  }
+
+  .project-takeaway {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    color: var(--accent-3);
+    background: rgba(42, 74, 58, 0.07);
+    padding: 0.75rem 1rem;
+    border-left: 2px solid var(--accent-3);
+    margin-bottom: 1.5rem;
+  }
+
+  .project-btns { display: flex; gap: 0.8rem; }
+
+  /* Coming soon cards */
+  .project-coming {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    margin-top: 2rem;
+  }
+  .coming-card {
+    border: 1.5px dashed var(--paper-3);
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .coming-label {
+    font-family: var(--mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+  }
+  .coming-title {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 1.1rem;
+    color: var(--ink-2);
+  }
+
+  /* ─── HOBBIES ─── */
+  #hobbies { background: var(--paper-2); }
+
+  .hobbies-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+  .hobby-card {
+    background: var(--paper);
+    border: 1px solid var(--paper-3);
+    padding: 2rem;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  .hobby-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.07);
+  }
+  .hobby-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    display: block;
+  }
+  .hobby-name {
+    font-family: var(--display);
+    font-size: 1.8rem;
+    letter-spacing: 0.03em;
+    line-height: 1;
+    color: var(--ink);
+    margin-bottom: 0.75rem;
+  }
+  .hobby-why {
+    font-size: 0.9rem;
+    color: var(--ink-2);
+    line-height: 1.7;
+    margin-bottom: 1rem;
+  }
+  .hobby-insight {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    padding-top: 1rem;
+    border-top: 1px solid var(--paper-3);
+  }
+
+  .hobbies-footer {
+    margin-top: 3rem;
+    text-align: center;
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 1.4rem;
+    color: var(--ink-3);
+  }
+
+  /* ─── NEEDS & WANTS ─── */
+  #wants { background: var(--ink); color: var(--paper); }
+  #wants .section-title { color: var(--paper); }
+  #wants .section-title em { color: var(--accent-2); }
+  #wants .section-header { border-color: rgba(255,255,255,0.1); }
+  #wants .section-number { color: rgba(255,255,255,0.3); }
+
+  .wants-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+  }
+  .wants-col-label {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent-2);
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+  .wants-col-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: rgba(255,255,255,0.1);
+  }
+  .wants-list { list-style: none; }
+  .wants-list li {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 1.15rem;
+    color: rgba(245,242,235,0.85);
+    line-height: 1.6;
+    padding: 1.2rem 0;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+    padding-left: 1.2rem;
+    position: relative;
+  }
+  .wants-list li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-style: normal;
+  }
+
+  .both-benefit {
+    margin-top: 5rem;
+    padding-top: 3rem;
+    border-top: 1px solid rgba(255,255,255,0.1);
+  }
+  .benefit-label {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.3);
+    margin-bottom: 2rem;
+    text-align: center;
+  }
+  .benefit-table {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.1);
+  }
+  .benefit-row {
+    display: contents;
+  }
+  .benefit-cell {
+    background: var(--ink);
+    padding: 1.1rem 1.5rem;
+    font-size: 0.9rem;
+    color: rgba(245,242,235,0.8);
+    line-height: 1.5;
+  }
+  .benefit-cell.you { border-left: 2px solid var(--accent); }
+  .benefit-cell.them { border-left: 2px solid var(--accent-2); }
+  .benefit-header {
+    background: rgba(255,255,255,0.04);
+    padding: 0.8rem 1.5rem;
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+  .benefit-header.you { color: var(--accent); }
+  .benefit-header.them { color: var(--accent-2); }
+
+  /* ─── TOOLKIT ─── */
+  #toolkit { background: var(--paper); }
+
+  .toolkit-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+    margin-bottom: 4rem;
+  }
+  .toolkit-card {
+    border: 1px solid var(--paper-3);
+    padding: 1.5rem;
+    background: var(--paper-2);
+  }
+  .toolkit-category {
+    font-family: var(--mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--paper-3);
+  }
+  .toolkit-items { list-style: none; }
+  .toolkit-items li {
+    font-size: 0.85rem;
+    color: var(--ink-2);
+    padding: 0.3rem 0;
+    line-height: 1.4;
+    border-bottom: 1px solid rgba(0,0,0,0.04);
+  }
+  .toolkit-items li:last-child { border: none; }
+
+  .philosophy-block {
+    background: var(--paper-2);
+    border-left: 3px solid var(--accent);
+    padding: 2.5rem 3rem;
+    max-width: 800px;
+  }
+  .philosophy-text {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 1.15rem;
+    line-height: 1.8;
+    color: var(--ink-2);
+    margin-bottom: 1.5rem;
+  }
+  .philosophy-attr {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+  }
+
+  /* ─── CONTACT ─── */
+  #contact { background: var(--paper-2); min-height: auto; padding-bottom: 8rem; }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    align-items: start;
+  }
+  .contact-headline {
+    font-family: var(--display);
+    font-size: clamp(2.5rem, 4vw, 4.5rem);
+    line-height: 0.95;
+    letter-spacing: 0.02em;
+    margin-bottom: 1.5rem;
+  }
+  .contact-headline em {
+    font-family: var(--serif);
+    font-style: italic;
+    color: var(--accent);
+  }
+  .contact-note {
+    font-size: 1rem;
+    color: var(--ink-2);
+    line-height: 1.8;
+    margin-bottom: 2rem;
+    font-family: var(--serif);
+    font-style: italic;
+  }
+
+  .contact-links { display: flex; flex-direction: column; gap: 1rem; }
+  .contact-link {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+    padding: 1.2rem 1.5rem;
+    background: var(--paper);
+    border: 1px solid var(--paper-3);
+    text-decoration: none;
+    color: var(--ink);
+    transition: all 0.25s;
+    position: relative;
+    overflow: hidden;
+  }
+  .contact-link::after {
+    content: '→';
+    position: absolute;
+    right: 1.5rem;
+    font-size: 1rem;
+    opacity: 0;
+    transform: translateX(-6px);
+    transition: all 0.25s;
+  }
+  .contact-link:hover { border-color: var(--ink); }
+  .contact-link:hover::after { opacity: 1; transform: translateX(0); }
+
+  .contact-link-icon {
+    width: 2.5rem; height: 2.5rem;
+    background: var(--paper-2);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.1rem;
+    flex-shrink: 0;
+  }
+  .contact-link-text { flex: 1; }
+  .contact-link-label {
+    font-family: var(--mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    display: block;
+    margin-bottom: 0.1rem;
+  }
+  .contact-link-value {
+    font-size: 0.9rem;
+    color: var(--ink);
+  }
+
+  .contact-docs { margin-top: 2rem; }
+  .contact-docs-label {
+    font-family: var(--mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    margin-bottom: 0.8rem;
+  }
+  .doc-btns { display: flex; gap: 0.8rem; }
+
+  /* FOOTER */
+  footer {
+    background: var(--ink);
+    padding: 2rem 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .footer-name {
+    font-family: var(--display);
+    font-size: 1.2rem;
+    color: var(--paper);
+    letter-spacing: 0.05em;
+  }
+  .footer-closing {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 0.85rem;
+    color: rgba(245,242,235,0.4);
+  }
+
+  /* NOISE TEXTURE OVERLAY */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.4;
+  }
+
+  /* SCROLL ANIMATIONS */
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { gap: 1.5rem; }
+    section { padding: 7rem 1.5rem 4rem; }
+    #home { grid-template-columns: 1fr; padding-top: 8rem; }
+    .hero-right { display: none; }
+    .project-card { grid-template-columns: 1fr; }
+    .project-findings { grid-template-columns: repeat(3, 1fr); }
+    .hobbies-grid { grid-template-columns: 1fr; }
+    .wants-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .toolkit-grid { grid-template-columns: repeat(2, 1fr); }
+    .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
+    .benefit-table { grid-template-columns: 1fr; }
+    .benefit-header.them, .benefit-cell.them { border-left: none; border-top: 2px solid var(--accent-2); }
+    .project-coming { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAVIGATION -->
+<nav id="navbar">
+  <a href="#home" class="nav-logo">[YOUR NAME]</a>
+  <ul class="nav-links">
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#hobbies">Hobbies</a></li>
+    <li><a href="#wants">What I Want</a></li>
+    <li><a href="#toolkit">Toolkit</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="home">
+  <div class="hero-left">
+    <div class="hero-eyebrow">Upcoming Statistician &amp; Future Data Scientist</div>
+    <h1 class="hero-headline">
+      I don't<br>chase <em>jobs.</em><br>I chase<br>problems.
+    </h1>
+    <p class="hero-bio">
+      I build bridges between raw numbers and human decisions — whether that's explaining why a music video went viral or predicting what customers do before they do it.<br><br>
+      I'm not looking for a spot to fill. I'm looking for a team that wants to grow <em>with</em> me. If you see data as a conversation, not a commandment — we should talk.
+    </p>
+    <div class="hero-btns">
+      <a href="#contact" class="btn btn-primary">Let's Connect</a>
+      <a href="#projects" class="btn btn-outline">See the Work</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-stat-card">
+      <div class="stat-num">5.6×</div>
+      <div class="stat-label">View velocity spike from rivalry-driven engagement</div>
+    </div>
+    <div class="hero-stat-card">
+      <div class="stat-num">43%</div>
+      <div class="stat-label">vs 8% rivalry comments — Z-test confirmed p&lt;0.001</div>
+    </div>
+    <div class="hero-stat-card">
+      <div class="stat-num">10M</div>
+      <div class="stat-label">views in 11 days — decomposed and explained</div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-header reveal">
+    <span class="section-number">01</span>
+    <h2 class="section-title">The <em>Evidence</em></h2>
+  </div>
+
+  <!-- Project 1 -->
+  <div class="project-card reveal">
+    <div class="project-meta">
+      <div class="project-index">01</div>
+      <div class="project-tags">
+        <span class="tag">Python</span>
+        <span class="tag">YouTube API</span>
+        <span class="tag">NLP</span>
+        <span class="tag">Stat Testing</span>
+      </div>
+    </div>
+    <div class="project-content">
+      <h3 class="project-title">The Rivalry Effect</h3>
+      <p class="project-hook">Quantifying how conflict drives music video views — and what it actually means for long-term growth.</p>
+      <p class="project-desc">
+        Two East African music videos. Same lead artist (Bien). Dramatically different trajectories. "Finale" hit 10M views in 11 days while "Katam" took 9 months. The obvious answer is "rivalry made it go viral." I wanted the statistical answer.
+        <br><br>
+        I decomposed view velocity, classified comment sentiment using basic NLP, and ran a two-proportion Z-test to isolate whether the spike was organic or conflict-driven. It was conflict-driven — and the data proved it.
+      </p>
+      <div class="project-findings">
+        <div class="finding">
+          <div class="finding-val">5.6×</div>
+          <div class="finding-desc">Early velocity multiplier</div>
+        </div>
+        <div class="finding">
+          <div class="finding-val">43%</div>
+          <div class="finding-desc">Rivalry comments vs 8% baseline</div>
+        </div>
+        <div class="finding">
+          <div class="finding-val">&lt;0.001</div>
+          <div class="finding-desc">p-value (Z-test confirmed)</div>
+        </div>
+      </div>
+      <div class="project-takeaway">
+        Key insight: Viral ≠ Valuable. Conflict-driven growth is borrowed attention. Long-tail organic assets win.
+      </div>
+      <div class="project-btns">
+        <a href="https://github.com/yourusername" target="_blank" class="btn-sm">View on GitHub →</a>
+        <a href="#" class="btn-sm">Case Study PDF →</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Placeholder Projects -->
+  <div class="project-coming reveal">
+    <div class="coming-card">
+      <span class="coming-label">Next project — In progress</span>
+      <span class="coming-title">Your second case study goes here.</span>
+      <p style="font-size:0.85rem; color: var(--ink-3); margin-top:0.5rem;">A curious analyst never stops asking questions. This slot fills when the next good problem shows up.</p>
+    </div>
+    <div class="coming-card">
+      <span class="coming-label">Future project — Planned</span>
+      <span class="coming-title">Your third case study goes here.</span>
+      <p style="font-size:0.85rem; color: var(--ink-3); margin-top:0.5rem;">Data doesn't run out. Neither does curiosity.</p>
+    </div>
+  </div>
+</section>
+
+<!-- HOBBIES -->
+<section id="hobbies">
+  <div class="section-header reveal">
+    <span class="section-number">02</span>
+    <h2 class="section-title">The <em>Human</em><br>Behind the Data</h2>
+  </div>
+  <div class="hobbies-grid">
+    <div class="hobby-card reveal">
+      <span class="hobby-icon">🎧</span>
+      <div class="hobby-name">Music Chart Analysis</div>
+      <p class="hobby-why">When a song climbs the charts, I don't just listen — I ask why. What changed in week three? Why did streaming spike on Tuesday? I naturally turn observed patterns into hypotheses.</p>
+      <div class="hobby-insight">Skill transfer → Asking "why" when numbers move</div>
+    </div>
+    <div class="hobby-card reveal">
+      <span class="hobby-icon">♟️</span>
+      <div class="hobby-name">Chess &amp; Strategy</div>
+      <p class="hobby-why">Every move is a conditional probability. Chess trained me to think in branching outcomes, to sacrifice short-term advantage for structural superiority — a mindset that translates directly to model design.</p>
+      <div class="hobby-insight">Skill transfer → Pattern recognition, 3 moves ahead</div>
+    </div>
+    <div class="hobby-card reveal">
+      <span class="hobby-icon">📖</span>
+      <div class="hobby-name">Behavioral Economics</div>
+      <p class="hobby-why">Kahneman, Thaler, Ariely — I read them because I believe data without human context is just decoration. Understanding why people deviate from rationality makes me a better analyst of human-generated data.</p>
+      <div class="hobby-insight">Skill transfer → Context over raw numbers</div>
+    </div>
+    <div class="hobby-card reveal">
+      <span class="hobby-icon">🏀</span>
+      <div class="hobby-name">Basketball Analytics</div>
+      <p class="hobby-why">Box scores lie. PER is incomplete. The best basketball analysts know that efficiency ratings only mean something next to usage rates, lineup context, and opponent adjustments. Sports taught me to distrust surface metrics.</p>
+      <div class="hobby-insight">Skill transfer → Questioning the obvious stat</div>
+    </div>
+  </div>
+  <p class="hobbies-footer reveal">"I don't just collect hobbies. I collect questions."</p>
+</section>
+
+<!-- NEEDS & WANTS -->
+<section id="wants">
+  <div class="section-header reveal">
+    <span class="section-number">03</span>
+    <h2 class="section-title">What I <em>Need.</em><br>What I <em>Want.</em></h2>
+  </div>
+  <div class="wants-grid">
+    <div class="reveal">
+      <div class="wants-col-label">What I need (to be pushed)</div>
+      <ul class="wants-list">
+        <li>A manager who challenges me — not one who just manages me.</li>
+        <li>Honest feedback. Even when it's uncomfortable. Especially then.</li>
+        <li>Problems that don't have obvious answers.</li>
+        <li>A team where "I don't know" is the start of a conversation, not the end of one.</li>
+      </ul>
+    </div>
+    <div class="reveal">
+      <div class="wants-col-label" style="color: var(--accent-2);">What I want (in my career)</div>
+      <ul class="wants-list">
+        <li>To move from "reporting what happened" to "predicting what's next."</li>
+        <li>To work where data empowers people — not just tracks them.</li>
+        <li>To earn the title Data Scientist through real impact, not time served.</li>
+        <li>To look back in 5 years knowing I grew faster than I expected — because I was in the right environment.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="both-benefit reveal">
+    <div class="benefit-label">The Exchange — Why this works for both of us</div>
+    <div class="benefit-table">
+      <div class="benefit-row">
+        <div class="benefit-header you">What I bring</div>
+        <div class="benefit-header them">What you bring</div>
+      </div>
+      <div class="benefit-row">
+        <div class="benefit-cell you">Curiosity that doesn't stop at the first answer</div>
+        <div class="benefit-cell them">Problems worth solving</div>
+      </div>
+      <div class="benefit-row">
+        <div class="benefit-cell you">Willingness to be wrong and learn fast</div>
+        <div class="benefit-cell them">Mentorship and honest feedback</div>
+      </div>
+      <div class="benefit-row">
+        <div class="benefit-cell you">Technical skills — Python, stats, APIs</div>
+        <div class="benefit-cell them">Real data with real stakes</div>
+      </div>
+      <div class="benefit-row">
+        <div class="benefit-cell you">A partner mindset, not an employee mindset</div>
+        <div class="benefit-cell them">A career path, not just a paycheck</div>
+      </div>
+      <div class="benefit-row">
+        <div class="benefit-cell you">Stats explained to non-stats people</div>
+        <div class="benefit-cell them">A team that respects the craft</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TOOLKIT -->
+<section id="toolkit">
+  <div class="section-header reveal">
+    <span class="section-number">04</span>
+    <h2 class="section-title">The <em>Toolkit</em></h2>
+  </div>
+  <div class="toolkit-grid reveal">
+    <div class="toolkit-card">
+      <div class="toolkit-category">Stats &amp; Testing</div>
+      <ul class="toolkit-items">
+        <li>Hypothesis testing (Z, t, chi-square)</li>
+        <li>Linear &amp; logistic regression</li>
+        <li>A/B testing frameworks</li>
+        <li>Two-proportion Z-test</li>
+        <li>Confidence intervals</li>
+      </ul>
+    </div>
+    <div class="toolkit-card">
+      <div class="toolkit-category">Programming</div>
+      <ul class="toolkit-items">
+        <li>Python — pandas, numpy</li>
+        <li>matplotlib, seaborn</li>
+        <li>SQL (queries, joins, aggregations)</li>
+        <li>Basic R</li>
+        <li>Jupyter Notebooks</li>
+      </ul>
+    </div>
+    <div class="toolkit-card">
+      <div class="toolkit-category">Data Sources</div>
+      <ul class="toolkit-items">
+        <li>YouTube Data API v3</li>
+        <li>Web scraping (BeautifulSoup)</li>
+        <li>CSV / Excel (openpyxl)</li>
+        <li>Basic NLP (TextBlob, regex)</li>
+        <li>JSON parsing</li>
+      </ul>
+    </div>
+    <div class="toolkit-card">
+      <div class="toolkit-category">Soft Skills</div>
+      <ul class="toolkit-items">
+        <li>Asking "why" five times</li>
+        <li>Explaining stats to non-stats people</li>
+        <li>Structuring messy problems</li>
+        <li>Finding the question behind the question</li>
+        <li>Failing fast, iterating faster</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="philosophy-block reveal">
+    <p class="philosophy-text">
+      "Data is never neutral. Every dataset carries the fingerprints of how it was collected, who asked the question, and what was left out. My job is not to find answers. My job is to find better questions. A p-value is not a conclusion. A dashboard is not a decision. I am here to translate between the certain language of numbers and the uncertain reality of humans."
+    </p>
+    <div class="philosophy-attr">How I think about data</div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-header reveal">
+    <span class="section-number">05</span>
+    <h2 class="section-title">Let's <em>Talk</em></h2>
+  </div>
+  <div class="contact-grid">
+    <div class="reveal">
+      <h3 class="contact-headline">Not hiring<br>me. <em>Partnering</em><br>with me.</h3>
+      <p class="contact-note">
+        "If that sounds different from the usual pitch — it is. I'm not asking for a chance. I'm asking: does your team have room for someone who thinks like this?"
+      </p>
+      <div class="contact-docs">
+        <div class="contact-docs-label">Download credentials</div>
+        <div class="doc-btns">
+          <a href="#" class="btn btn-primary" style="font-size: 0.68rem; padding: 0.75rem 1.5rem;">Resume (1 page)</a>
+          <a href="#" class="btn btn-outline" style="font-size: 0.68rem; padding: 0.75rem 1.5rem;">Full CV (3 pages)</a>
+        </div>
+      </div>
+    </div>
+    <div class="contact-links reveal">
+      <a href="https://linkedin.com/in/yourprofile" target="_blank" class="contact-link">
+        <div class="contact-link-icon">in</div>
+        <div class="contact-link-text">
+          <span class="contact-link-label">LinkedIn</span>
+          <span class="contact-link-value">linkedin.com/in/yourprofile</span>
+        </div>
+      </a>
+      <a href="https://wa.me/2547XXXXXXXX?text=I%20saw%20your%20portfolio" target="_blank" class="contact-link">
+        <div class="contact-link-icon">WA</div>
+        <div class="contact-link-text">
+          <span class="contact-link-label">WhatsApp</span>
+          <span class="contact-link-value">+254 7XX XXX XXX</span>
+        </div>
+      </a>
+      <a href="mailto:youremail@domain.com" class="contact-link">
+        <div class="contact-link-icon">@</div>
+        <div class="contact-link-text">
+          <span class="contact-link-label">Email</span>
+          <span class="contact-link-value">youremail@domain.com</span>
+        </div>
+      </a>
+      <a href="https://github.com/yourusername" target="_blank" class="contact-link">
+        <div class="contact-link-icon" style="font-size:0.75rem; font-family: var(--mono);">GH</div>
+        <div class="contact-link-text">
+          <span class="contact-link-label">GitHub</span>
+          <span class="contact-link-value">github.com/yourusername</span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span class="footer-name">[YOUR NAME]</span>
+  <span class="footer-closing">"You don't need permission to start. You already have everything except momentum."</span>
+</footer>
+
+<script>
+  // Nav scroll effect
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 50);
+  });
+
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), 80);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => observer.observe(el));
+
+  // Stagger sibling reveals
+  document.querySelectorAll('.hobbies-grid, .toolkit-grid, .project-findings').forEach(grid => {
+    const children = grid.querySelectorAll('.reveal, .hobby-card, .toolkit-card');
+    children.forEach((child, i) => {
+      child.style.transitionDelay = `${i * 0.1}s`;
+    });
+  });
+</script>
+</body>
+</html>
